@@ -1,0 +1,29 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+public class KaartideGeneraator {
+    private static final List<String> mastid = List.of("♦", "♣", "♥", "♠"); //Loome algsed default listid, kus on mastid ja numbrid kaartide jaoks
+    private static final List<String> numbrid = List.of("2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A");
+    private final Random random = new Random();  //Klassi Random kasutamine.
+    public KaartideGeneraator() {};
+
+    public List<Kaart> genereerimeKaardid() {
+        List<Kaart> kaardid = new ArrayList<>();
+        List<Kaart> olemasolevadkaardid = new ArrayList<>();
+        for (int i = 0; i < 5; ) {
+            int suvalinemast = random.nextInt(mastid.size());
+            int suvalinenr = random.nextInt(numbrid.size());
+            Kaart uuskaart = new Kaart(mastid.get(suvalinemast), numbrid.get(suvalinenr));
+            if (!olemasolevadkaardid.contains(uuskaart)) { //Kontrollime, kas kaart, mis genereeriti on juba olemas, kui on, siis jätkub tsükkel kohe, kui kaarti ei ole
+                                                           //siis lisatakse olemasolevate kaartide listi genereeritud kaart, seejärel lisatakse uute kaartide listi kaart, ja jätkatakse
+                                                           //tsüklit i++ga.
+                olemasolevadkaardid.add(uuskaart);
+                kaardid.add(uuskaart);
+                i++;
+            }
+
+        }
+        return kaardid;
+    }
+
+}
