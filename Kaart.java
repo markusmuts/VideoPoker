@@ -1,8 +1,7 @@
-package ProjektVideoPoker;
 
 import java.util.Objects;
 
-public class Kaart {
+public class Kaart{
     private String mast;
     private String number;
 
@@ -19,6 +18,7 @@ public class Kaart {
         this.number = number;
 
     }
+
     public String toString() {
         return mast + number;
     }
@@ -29,7 +29,9 @@ public class Kaart {
         Kaart kaart = (Kaart) o;
         return mast.equals(kaart.mast) && number.equals(kaart.number);
     }
+
     public int hashCode() {  // Hashcode meetod on vajalik listis unikaalsuse tagamiseks
         return Objects.hash(mast, number);
     }
+
 }
