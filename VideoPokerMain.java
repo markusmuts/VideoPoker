@@ -36,13 +36,14 @@ public class VideoPokerMain {
             for (String s : indeksid) {
                 indeksid1.add(Integer.parseInt(s));
             }
+            Collections.sort(indeksid1);
 
             List<Kaart> viimaneKaardiPakk = new ArrayList<>();
             for (int i = 0; i < indeksid1.size(); i++) {
-                viimaneKaardiPakk.add(algneKaardiPakk.get(indeksid1.get(i)-1));
+                viimaneKaardiPakk.add(algneKaardiPakk.get(indeksid1.get(i) - 1));
             }
 
-            int genereeritudKaartideArv  = 5 - viimaneKaardiPakk.size();
+            int genereeritudKaartideArv = 5 - viimaneKaardiPakk.size();
             List<Kaart> viimasedGenereeritudKaardid = new ArrayList<>();
             while (viimasedGenereeritudKaardid.size() < genereeritudKaartideArv) {
                 List<Kaart> uuedKaardid = generaator.genereerimeKaardid(1);
@@ -54,6 +55,14 @@ public class VideoPokerMain {
                 }
 
             }
+            for (int i = 0; i < indeksid1.size(); i++) {
+                viimaneKaardiPakk.remove(0); // Eemaldame esimese elemendi mitu korda
+            }
+
+
+            for (int i = 0; i < indeksid1.size(); i++) {
+                viimaneKaardiPakk.add(indeksid1.get(i) - 1, algneKaardiPakk.get(indeksid1.get(i) - 1));
+            }
 
             System.out.println("Sinu viimane käsi: " + viimaneKaardiPakk);
 
@@ -62,6 +71,6 @@ public class VideoPokerMain {
             AuhinnaValjastaja tasuarvutaja = new AuhinnaValjastaja(viimaneKaardiPakk);
             double tasu = tasuarvutaja.arvutatasu(panus2, lõplikTulemus);
             System.out.println("Võitsite " + tasu + "€");
-        }}
-
+        }
+    }
 }
