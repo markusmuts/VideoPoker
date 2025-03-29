@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -8,6 +9,10 @@ public class VideoPokerMain {
         Scanner scanner = new Scanner(System.in);
 
         List<Kaart> algneKaardiPakk = generaator.genereerimeKaardid(5);
+        System.out.println("Sisesta oma panus eurodes: ");
+        String panus = scanner.nextLine();
+        double panus2 = Double.parseDouble(panus);
+        Collections.sort(algneKaardiPakk);
         System.out.println(algneKaardiPakk);
         System.out.println("See on sinu algne käsi: milliseid kaarte tahad alles jätta?, sisesta nt 1,2,3 (esimesel positsioonil olev kaart jne): ");
         String input = scanner.nextLine();
@@ -18,11 +23,14 @@ public class VideoPokerMain {
 
             String lõplikTulemus = Kontrollija.kontrolliPakki(viimaneKaardiPakk);
             System.out.println("Teie käsi on: " + lõplikTulemus);
+            AuhinnaValjastaja tasuarvutaja = new AuhinnaValjastaja(viimaneKaardiPakk);
+            double tasu = tasuarvutaja.arvutatasu(panus2, lõplikTulemus);
+            System.out.println("Võitsite " + tasu + "€");
         } else {
             String[] indeksid = input.split(",");
             for (int i = 0; i < indeksid.length; i++) {
-            indeksid[i] = indeksid[i].trim();
-        }
+                indeksid[i] = indeksid[i].trim();
+            }
 
             List<Integer> indeksid1 = new ArrayList<>();
             for (String s : indeksid) {
@@ -51,13 +59,9 @@ public class VideoPokerMain {
 
             String lõplikTulemus = Kontrollija.kontrolliPakki(viimaneKaardiPakk);
             System.out.println("Teie käsi on: " + lõplikTulemus);
+            AuhinnaValjastaja tasuarvutaja = new AuhinnaValjastaja(viimaneKaardiPakk);
+            double tasu = tasuarvutaja.arvutatasu(panus2, lõplikTulemus);
+            System.out.println("Võitsite " + tasu + "€");
         }}
 
-}
-
-        System.out.println("Sinu viimane käsi: " + viimaneKaardiPakk);
-
-        String lõplikTulemus = Kontrollija.kontrolliPakki(viimaneKaardiPakk);
-        System.out.println("Teie käsi on: " + lõplikTulemus);
-    }
 }
