@@ -124,7 +124,6 @@ public class Kontrollija {
      * @return Tagastab sõne, milles on kirjas, mis tüüpi käsi on.
      */
     public static String kontrolliPakki(List<Kaart> pakk){
-        String tulemus = null;
 
         // Kontrollime erinevaid kombinatsioone
         boolean onFlush = onFlush(pakk);
@@ -135,18 +134,15 @@ public class Kontrollija {
 
            // Kas on royal flush
             if (onRoyalFlush) {
-                tulemus = "Royal Flush";
-                return tulemus;
+                return "Royal Flush";
             }
 
             // Kas on straight flush
             if (onStraight) {
-                tulemus = "Straight Flush";
-                return tulemus;
+                return "Straight Flush";
             }
         } else if (onStraight) { // Kas on straight
-            tulemus = "Straight";
-            return tulemus;
+            return "Straight";
         }
 
         HashMap<String, Integer> kontrollitudKaardid = new HashMap<String, Integer>();
@@ -170,11 +166,9 @@ public class Kontrollija {
         switch (kontrollitudKaardid.size()) {
             case 0:
                 if (onFlush) {
-                    tulemus = "Flush";
-                    return tulemus;
+                    return "Flush";
                 } else {
-                    tulemus = "High Card";
-                    return tulemus;
+                    return "High Card";
                 }
 
             case 1:
@@ -183,14 +177,11 @@ public class Kontrollija {
 
                 switch (mituSamat) {
                     case 2:
-                        tulemus = "One Pair";
-                        return tulemus;
+                        return "One Pair";
                     case 3:
-                        tulemus = "Three of a Kind";
-                        return tulemus;
+                        return "Three of a Kind";
                     case 4:
-                        tulemus = "Four of a Kind";
-                        return tulemus;
+                        return "Four of a Kind";
                 }
 
             case 2:
@@ -201,13 +192,11 @@ public class Kontrollija {
                 int mituSamat2 = iterator.next();
 
                 if (mituSamat1 == mituSamat2) {
-                    tulemus = "Two Pair";
-                    return tulemus;
+                    return "Two Pair";
                 } else {
-                    tulemus = "Full House";
-                    return tulemus;
+                    return "Full House";
                 }
         }
-        return tulemus;
+        return null;
     }
 }
