@@ -28,15 +28,16 @@ public class VideoPokerMain {
                 System.out.println("🃏 Pokkerikäed ja väljamaksed:");
                 System.out.println("| Käsi                | Kirjeldus                                      | Koefitsient   |");
                 System.out.println("|---------------------|------------------------------------------------|-------------- |");
-                System.out.println("| Royal Flush         | Äss, Kuningas, Emand, Poiss, 10 samast mastist | 250x          |");
+                System.out.println("| Royal Flush         | Äss, Kuningas, Emand, Poiss, 10 samast mastist | 800x          |");
                 System.out.println("| Straight Flush      | Viis järjestikust kaarti samast mastist        | 50x           |");
-                System.out.println("| Four of a Kind      | Neli sama väärtusega kaarti                    | 25x           |");
-                System.out.println("| Full House          | Kolm ühesugust ja kaks teist ühesugust kaarti  | 9x            |");
-                System.out.println("| Flush               | Viis kaarti samast mastist                     | 6x            |");
-                System.out.println("| Straight            | Viis järjestikust kaarti (eri mastid)          | 4x            |");
+                System.out.println("| Four of a Kind      | Neli sama väärtusega kaarti                    | 30x           |");
+                System.out.println("| Full House          | Kolm ühesugust ja kaks teist ühesugust kaarti  | 10x           |");
+                System.out.println("| Flush               | Viis kaarti samast mastist                     | 8x            |");
+                System.out.println("| Straight            | Viis järjestikust kaarti (eri mastid)          | 5x            |");
                 System.out.println("| Three of a Kind     | Kolm sama väärtusega kaarti                    | 3x            |");
-                System.out.println("| Two Pair            | Kaks erinevat paari                            | 2x            |");
-                System.out.println("| One Pair            | Üks paar                                       | 1x            |");
+                System.out.println("| Two Pair            | Kaks erinevat paari                            | 1.5x          |");
+                System.out.println("| Jacks or Better     | Üks paar poistega või tugevamate kaartidega    | 1x            |");
+                System.out.println("| One Pair            | Üks paar                                       | 0.5x          |");
                 System.out.println("| High Card           | Kõrge kaart                                    | 0x            |\n");
 
                 System.out.println("❌ - Kuidas mängust väljuda?");

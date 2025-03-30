@@ -177,6 +177,11 @@ public class Kontrollija {
 
                 switch (mituSamat) {
                     case 2:
+                        // Kontrollime, kas on poste või tugevama kaardi paar
+                        List<String> poissVõiParem = List.of("J", "Q", "K", "A");
+                        if (poissVõiParem.contains(kontrollitudKaardid.keySet().iterator().next())) {
+                            return "Jacks or Better";
+                        }
                         return "One Pair";
                     case 3:
                         return "Three of a Kind";
