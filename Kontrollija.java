@@ -107,7 +107,7 @@ public class Kontrollija {
         }
 
         // Kontrollime, kas mingi kaart ei ole järjekorras
-        for (int i = 0; i < kaardid.length - 2; i++) {
+        for (int i = 0; i < kaardid.length; i++) {
             if (kaardid[i] != kaardid[i+1] - 1) {
                 onStraight = false;
                 break;

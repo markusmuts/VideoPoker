@@ -20,10 +20,10 @@ public class VideoPokerMain {
 
                 System.out.println("2. Vali hoitavad kaardid:");
                 System.out.println("   - Sisesta käsk \"1,3\", et hoida kaarte 1 ja 3 näiteks.");
-                System.out.println("   - Kindalsti ei pea kaarte hoidma, selleks sisesta mitte midagi või \"0\".\n");
+                System.out.println("   - Kindlasti ei pea kaarte hoidma, selleks sisesta mitte midagi või \"0\".\n");
 
                 System.out.println("3. Lõpliku käe kuvamine:");
-                System.out.println("   - Kui kõik valikud on tehtud, siis kuvatakse lõplik käsi koos väljamaksega.\n");
+                System.out.println("   - Kui valikud on tehtud, siis kuvatakse lõplik käsi koos väljamaksega.\n");
 
                 System.out.println("🃏 Pokkerikäed ja väljamaksed:");
                 System.out.println("| Käsi                | Kirjeldus                                      | Koefitsient   |");
@@ -121,9 +121,9 @@ public class VideoPokerMain {
                 double tasu = AuhinnaValjastaja.arvutatasu(panus, lõplikTulemus);
                 balanss += tasu;
                 if (lõplikTulemus.equals("High Card")) {
-                    System.out.println("Kahjuks ei võitnud seekord, proovi uuesti!\n");
+                    System.out.println("Kahjuks ei võitnud seekord, proovi uuesti!");
                 } else {
-                    System.out.println("Võitsite " + tasu + "€! Palju õnne!\n");
+                    System.out.println("Võitsite " + tasu + "€! Palju õnne!");
                 }
             } else {
                 String[] indeksid = input.split(",");
@@ -193,7 +193,7 @@ public class VideoPokerMain {
             }
         }
         if (balanss == 0){
-            System.out.println("Täna sa ei võtnud. Järgmine kord läheb paremini!");
+            System.out.println("\nTäna sa ei võtnud. Järgmine kord läheb paremini!");
         }
     }
 }
