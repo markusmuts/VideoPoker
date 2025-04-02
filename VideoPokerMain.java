@@ -109,6 +109,8 @@ public class VideoPokerMain {
             if (indeks >= 1 && indeks <= 5){
                 if (!indeksidList.contains(indeks)){
                     indeksidList.add(indeks);
+                } else {
+                    throw new RuntimeException();
                 }
             } else{
                 throw new RuntimeException();
@@ -137,7 +139,6 @@ public class VideoPokerMain {
                 break;
             } else {
                 try{
-
                     double sisendArvuna = Double.parseDouble(sisend);
                     if (sisendArvuna <= 0) throw new Exception();
                     else panus = sisendArvuna;
