@@ -73,6 +73,49 @@ public class VideoPokerMain {
     }
 
 
+    private static String kontrolliValikut(List<Kaart> algneKaardiPakk, Scanner scanner) throws InterruptedException {
+        String input;
+        while (true){
+            System.out.println("\n" + algneKaardiPakk);
+            System.out.print("See on sinu algne käsi. Milliseid kaarte tahad alles jätta?, sisesta nt \"1,2,3\": ");
+            input = scanner.nextLine();
+            if (input.isEmpty() || input.equals("0")) {
+                break;
+            } else {
+                try {
+                    // Vaatame, kas viskab veateate
+                    indeksidListi(input);
+                    break;
+                } catch (Throwable e){
+                    // Kui viskab, siis lähme tagasi algusesse
+                    System.err.println("Tundmatu sisend \"" + input + "\", proovi uuesti!");
+                    Thread.sleep(100); // Kindlustada, et veateade jõuaks enne ekraanile
+                }
+            }
+        }
+        return input;
+    }
+
+    private static List<Integer> indeksidListi(String input){
+        List<Integer> indeksidList = new ArrayList<>();
+        String[] indeksid = input.split(",");
+        for (int i = 0; i < indeksid.length; i++) {
+            indeksid[i] = indeksid[i].trim();
+        }
+
+        for (String s : indeksid) {
+            int indeks = Integer.parseInt(s);
+            if (indeks >= 1 && indeks <= 5){
+                indeksidList.add(indeks);
+            } else{
+                throw new RuntimeException();
+            }
+
+        }
+
+        return indeksidList;
+    }
+
     public static void main(String[] args) throws InterruptedException {
         KaartideGeneraator generaator = new KaartideGeneraator();
         Scanner scanner = new Scanner(System.in);
@@ -87,12 +130,12 @@ public class VideoPokerMain {
             String sisend = scanner.nextLine();
 
             if (sisend.equalsIgnoreCase("q")){
-                System.out.println("Välja võetud summa: " + balanss);
+                System.out.println("\nVälja võetud summa: " + balanss + "€");
                 break;
             } else {
                 try{
                     panus = Double.parseDouble(sisend);
-                }catch (Exception e){
+                } catch (Exception e){
                     System.err.println("Tundmatu sisend \"" + sisend + "\", proovi uuesti!");
                     Thread.sleep(100); // Kindlustada, et veateade jõuaks enne ekraanile
                     continue;
@@ -108,9 +151,7 @@ public class VideoPokerMain {
             balanss -= panus;
 
             List<Kaart> algneKaardiPakk = generaator.genereerimeKaardid(5);
-            System.out.println(algneKaardiPakk);
-            System.out.print("See on sinu algne käsi. Milliseid kaarte tahad alles jätta?, sisesta nt \"1,2,3\": ");
-            String input = scanner.nextLine();
+            String input = kontrolliValikut(algneKaardiPakk, scanner);
 
             if (input.isEmpty() || input.equals("0")) {
                 List<Kaart> viimaneKaardiPakk = generaator.genereerimeKaardid(5);
@@ -127,38 +168,18 @@ public class VideoPokerMain {
                     System.out.println("Võitsite " + tasu + "€! Palju õnne!");
                 }
             } else {
-                String[] indeksid = input.split(",");
-                List<Integer> indeksidList = new ArrayList<>();
-                for (int i = 0; i < indeksid.length; i++) {
-                    indeksid[i] = indeksid[i].trim();
-                }
-
-                try{
-                    for (String s : indeksid) {
-                        indeksidList.add(Integer.parseInt(s));
-                    }
-                } catch (Exception e){
-                    System.err.println("Viga sisendiga \"" + input + "\". Proovi uuesti!");
-                    Thread.sleep(100); // Kindlustada, et veateade jõuaks enne ekraanile
-                    balanss += panus;
-                    continue;
-                }
+                List<Integer> indeksidList = indeksidListi(input);
                 Collections.sort(indeksidList);
 
                 List<Kaart> viimaneKaardiPakk = new ArrayList<>();
-                try {
-                    for (int i = 0; i < indeksidList.size(); i++) {
-                        viimaneKaardiPakk.add(algneKaardiPakk.get(indeksidList.get(i) - 1));
-                    }
-                } catch (Exception e) {
-                    System.err.println("Viga sisendiga \"" + input + "\". Proovi uuesti!");
-                    Thread.sleep(100); // Kindlustada, et veateade jõuaks enne ekraanile
-                    balanss += panus;
-                    continue;
+
+                for (int i = 0; i < indeksidList.size(); i++) {
+                    viimaneKaardiPakk.add(algneKaardiPakk.get(indeksidList.get(i) - 1));
                 }
 
                 int genereeritudKaartideArv = 5 - viimaneKaardiPakk.size();
                 List<Kaart> viimasedGenereeritudKaardid = new ArrayList<>();
+
                 while (viimasedGenereeritudKaardid.size() < genereeritudKaartideArv) {
                     List<Kaart> uuedKaardid = generaator.genereerimeKaardid(1);
                     Kaart uusKaart = uuedKaardid.getFirst();
@@ -197,4 +218,5 @@ public class VideoPokerMain {
             System.out.println("\nTäna sa ei võtnud. Järgmine kord läheb paremini!");
         }
     }
+
 }
