@@ -99,6 +99,7 @@ public class VideoPokerMain {
     private static List<Integer> indeksidListi(String input){
         List<Integer> indeksidList = new ArrayList<>();
         String[] indeksid = input.split(",");
+
         for (int i = 0; i < indeksid.length; i++) {
             indeksid[i] = indeksid[i].trim();
         }
@@ -106,7 +107,9 @@ public class VideoPokerMain {
         for (String s : indeksid) {
             int indeks = Integer.parseInt(s);
             if (indeks >= 1 && indeks <= 5){
-                indeksidList.add(indeks);
+                if (!indeksidList.contains(indeks)){
+                    indeksidList.add(indeks);
+                }
             } else{
                 throw new RuntimeException();
             }
@@ -134,7 +137,10 @@ public class VideoPokerMain {
                 break;
             } else {
                 try{
-                    panus = Double.parseDouble(sisend);
+
+                    double sisendArvuna = Double.parseDouble(sisend);
+                    if (sisendArvuna <= 0) throw new Exception();
+                    else panus = sisendArvuna;
                 } catch (Exception e){
                     System.err.println("Tundmatu sisend \"" + sisend + "\", proovi uuesti!");
                     Thread.sleep(100); // Kindlustada, et veateade jõuaks enne ekraanile
